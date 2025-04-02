@@ -5,10 +5,10 @@ import { FaRegHeart } from "react-icons/fa";
 import Footer from '../component/Layout/Footer';
 import { IoMdShuffle } from "react-icons/io";
 import SwipeCard from '../component/Card/swipeCard'
-const Swipe = () => {
+const Swipe = ({activeItem}) => {
     return (
         <>
-            <Header />
+            <Header activeItem={3} />
             <div className="bg-gray-100 min-h-screen ">
                 <div className="max-w-6xl mx-auto p-6">
                     <div className="text-center">
