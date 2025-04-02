@@ -11,7 +11,7 @@ const Header = () => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <header className="w-full  border-b border-b-[#ffffff32] bg-white shadow-md">
+        <header className="w-full  border-b border-b-[#ffffff32] bg-white shadow-lg">
             {/* Desktop Header */}
             <div className="hidden md:flex items-center justify-between w-[90%] mx-auto">
                 <Link href="/">
