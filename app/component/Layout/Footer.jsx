@@ -6,7 +6,7 @@ import Logo from '../../../public/assets/logo.png';
 
 const Footer = () => {
   return (
-    <footer className="bg-red-600 text-center p-6 border-t-4 border-[#FFD609]">
+    <footer className="bg-red-600 text-center p-6">
       {/* Logo */}
       <div className="flex justify-center mb-4">
         <Image src={Logo} alt="Logo" width={100} height={100} />
