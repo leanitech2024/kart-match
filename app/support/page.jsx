@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Header from '../component/Layout/Header'
 import Footer from '../component/Layout/Footer'
-export default function DonationForm({activeItem}) {
+export default function DonationForm() {
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -22,8 +22,8 @@ export default function DonationForm({activeItem}) {
 
     return (
         <>
-            <Header activeItem={6}/>
-            <div className="bg-gray-100 min-h-screen ">
+            <Header />
+            <div className="bg-gray-100 mt-24 min-h-screen ">
                 <div className="max-w-4xl mx-auto p-6">
                     <div className="text-center mt-6">
                         <h1 className="text-4xl font-semibold text-[#22343DCC] font-Poppins">

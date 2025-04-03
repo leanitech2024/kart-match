@@ -5,7 +5,7 @@ export default function Loading() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setTimeout(() => setLoading(false), 2000); // Simulating a delay
+    setTimeout(() => setLoading(false), 2000); 
   }, []);
 
   return (

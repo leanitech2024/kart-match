@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navigation from "./Navigation";
 import Logo from "../../../public/assets/logo.png";
 import { FaBars } from "react-icons/fa";
@@ -12,6 +12,22 @@ import { motion } from "framer-motion";
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeItem, setActiveItem] = useState(0);
+  const [isSticky, setIsSticky] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const handleNavClick = (index) => {
     setActiveItem(index);
@@ -19,20 +35,32 @@ const Header = () => {
   };
 
   return (
-    <header className="w-full border-b border-b-[#ffffff32] bg-white shadow-lg">
+    <header
+      className={`fixed top-0 w-full z-50 bg-white transition-all duration-300 ${
+        isSticky ? "shadow-lg" : ""
+      }`}
+    >
       {/* Desktop Header */}
-      <div className="hidden md:flex items-center justify-between w-[90%] mx-auto ">
+      <div className="hidden md:flex items-center justify-between w-[90%] mx-auto py-2">
         <Link href="/">
-          <Image src={Logo} alt="Logo" className="w-25 h-25" />
+          <Image
+            src={Logo}
+            alt="Logo"
+            className="w-20 h-20 transition-all duration-300"
+          />
         </Link>
         <Navigation activeItem={activeItem} onNavClick={handleNavClick} />
         <FiSun size="25" color="black" />
       </div>
 
       {/* Mobile Header */}
-      <div className="w-full md:hidden flex items-center justify-between px-5 py-2">
+      <div className="w-full md:hidden flex items-center justify-between px-5 py-3">
         <Link href="/">
-          <Image src={Logo} alt="Logo" className="w-20 h-20" />
+          <Image
+            src={Logo}
+            alt="Logo"
+            className="w-16 h-16 transition-all duration-300"
+          />
         </Link>
         <button className="text-black p-2 rounded-full" onClick={() => setIsOpen(true)}>
           <FaBars size={34} />
@@ -53,7 +81,7 @@ const Header = () => {
               <RxCross1 size={24} />
             </button>
 
-            {/* Navigation Items (Appearing one by one) */}
+            {/* Navigation Items */}
             <motion.div initial="hidden" animate="visible" variants={menuVariants}>
               <Navigation activeItem={activeItem} onNavClick={handleNavClick} />
             </motion.div>
