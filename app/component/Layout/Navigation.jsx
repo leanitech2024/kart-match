@@ -7,6 +7,7 @@ const navItem = [
   { title: "Home", href: "/" },
   { title: "Blog", href: "/blog" },
   { title: "Vendors", href: "/vendors" },
+  { title: "Gallery", href: "/gallery" },
   { title: "Let's Swipe", href: "/swipe" },
   { title: "Locate Us", href: "/locate" },
   { title: "Join Us", href: "/join" },
