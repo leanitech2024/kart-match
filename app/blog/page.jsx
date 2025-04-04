@@ -6,38 +6,45 @@ import Blog2 from '../../public/assets/Blog4.png'
 import Blog3 from '../../public/assets/Blog3.png'
 import Profile from '../../public/assets/Profile.png'
 import Footer from '../component/Layout/Footer'
+import Link from "next/link";
 const blogPosts = [
     {
+        id: 1,
         image: Blog1,
         title: "Samosa: the crispy, spicy hug you need on a bad day.",
         author: "Anjika",
         date: "January 1st, 2025",
     },
     {
+        id: 2,
         image: Blog2,
         title: "A good pani puri is like a burst of happiness in your mouth.",
         author: "Anjika",
         date: "January 1st, 2025",
     },
     {
+        id: 3,
         image: Blog3,
         title: "If happiness had a flavor, it would be bhel puri.",
         author: "Anjika",
         date: "January 1st, 2025",
     },
     {
+        id: 4,
         image: Blog1,
         title: "Samosa: the crispy, spicy hug you need on a bad day.",
         author: "Anjika",
         date: "January 1st, 2025",
     },
     {
+        id: 5,
         image: Blog2,
         title: "A good pani puri is like a burst of happiness in your mouth.",
         author: "Anjika",
         date: "January 1st, 2025",
     },
     {
+        id: 6,
         image: Blog3,
         title: "If happiness had a flavor, it would be bhel puri.",
         author: "Anjika",
@@ -49,6 +56,8 @@ const blog = () => {
     return (
         <>
             <Header />
+             
+
             <div className="bg-gray-100 mt-24 min-h-screen shadow-lg ">
                 <div className=" ">
                     <center className="mx-auto p-4">
@@ -71,7 +80,9 @@ const blog = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4 p-4">
                         {blogPosts.map((post, index) => (
-                            <div key={index} className="bg-[#FFD609] p-4 rounded-xl shadow-lg">
+                       
+                            <Link href={`/blog/${post.id}`} key={post.id} className="bg-[#FFD609] cursor-pointer p-4 rounded-xl shadow-lg">
+                              
                                 <div className="w-full h-82 overflow-hidden rounded-lg">
                                     <Image
                                         src={post.image}
@@ -96,7 +107,7 @@ const blog = () => {
                                     <span className="text-sm font-medium">{post.author}</span>
                                     <span className="text-sm text-gray-700">{post.date}</span>
                                 </div>
-                            </div>
+                            </Link>
                         ))}
                     </div>
                     <div className="flex justify-center items-center space-x-2 mt-6 py-6">
@@ -120,6 +131,7 @@ const blog = () => {
 
                 </div>
             </div>
+       
             <Footer />
         </>
     );
