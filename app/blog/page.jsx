@@ -99,7 +99,7 @@ const blog = () => {
                             </div>
                         ))}
                     </div>
-                    <div className="flex justify-center items-center space-x-2 mt-6 mb-6">
+                    <div className="flex justify-center items-center space-x-2 mt-6 py-6">
                         {/* Active Page */}
                         <button className="px-4 py-2 rounded-lg bg-orange-500 text-white font-medium">
                             1

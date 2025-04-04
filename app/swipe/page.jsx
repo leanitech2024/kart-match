@@ -44,7 +44,7 @@ const Swipe = () => {
                     </div>
 
                 </div>
-                <div className="mb-10" >
+                <div className="py-10" >
                     <SwipeCard />
                 </div>
             </div>
