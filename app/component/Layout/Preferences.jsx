@@ -26,9 +26,9 @@ const cardData = [
 
 const Preferences = () => {
   return (
-    <div className="bg-yellow-400 w-full py-10 px-6 ">
+    <div className=" w-full py-10 px-6 ">
       {/* Title Section */}
-      <h1 className="text-4xl font-semibold text-black">
+      <h1 className="text-4xl font-semibold text-gray-600">
         PICK <span className="text-green-600">ANY 2</span> Preferences
       </h1>
 

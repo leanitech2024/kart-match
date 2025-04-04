@@ -17,10 +17,10 @@ const images = [
 
 const Gallery = () => {
   return (
-    <div className="bg-red-600 py-10 px-6 w-full">
+    <div className=" py-10 px-6 w-full">
       {/* Title Section */}
-      <h1 className="text-3xl font-semibold text-black text-left">
-        FROM OUR USER <span className="text-yellow-400">GALLERY</span>
+      <h1 className="text-3xl font-semibold text-gray-600 text-left">
+        FROM OUR USER <span className="text-green-600">GALLERY</span>
       </h1>
       
       {/* Image Grid */}

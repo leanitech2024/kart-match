@@ -1,7 +1,7 @@
 
 const  Swipe = ()=> {
   return (
-    <div className="relative bg-yellow-400 text-center p-10 leading-loose">
+    <div className="relative  text-center p-10 leading-loose">
       <h2 className="text-3xl md:text-5xl font-bold text-green-700 ">
         Keep Swiping to discover the 
       </h2>

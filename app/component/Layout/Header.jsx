@@ -69,7 +69,7 @@ const Header = () => {
 
       {/* Mobile Navigation Menu */}
       {isOpen && (
-        <div className="fixed top-0 left-0 w-full h-screen bg-black bg-opacity-50 flex justify-center items-center">
+        <div className="fixed top-0 left-0 w-full h-screen bg-white bg-opacity-50 flex justify-center items-center">
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
