@@ -17,21 +17,21 @@ const images = [
 
 const Gallery = () => {
   return (
-    <div className=" py-10 px-6 w-full">
+    <div className=" py-10 px-6  w-full">
       {/* Title Section */}
       <h1 className="text-3xl font-semibold text-gray-600 text-left">
         FROM OUR USER <span className="text-green-600">GALLERY</span>
       </h1>
       
       {/* Image Grid */}
-      <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div className="mt-10 p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {images.map((src, index) => (
-          <div key={index} className="overflow-hidden rounded-3xl shadow-lg w-full h-80">
+          <div key={index} className="overflow-hidden rounded-3xl shadow-lg w-full h-80 ">
             <Image 
               src={src} 
               alt={`Gallery Image ${index + 1}`} 
-              width={300} 
-              height={300} 
+              width={250} 
+              height={250} 
               className="object-cover w-full h-full" 
             />
           </div>

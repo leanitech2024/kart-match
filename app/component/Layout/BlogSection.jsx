@@ -5,7 +5,7 @@ import Blog2 from '../../../public/assets/Blog4.png'
 import Profile from '../../../public/assets/Profile.png'
 const blogPosts = [
   {
-    image:Blog1,
+    image: Blog1,
     title: "Samosa: the crispy, spicy hug you need on a bad day.",
     author: "Anjika",
     date: "January 1st, 2025",
@@ -54,17 +54,20 @@ const BlogSection = () => {
               Category
             </span>
             <h3 className="text-2xl font-bold mt-2">{post.title}</h3>
-            <div className="flex items-center gap-2 mt-4">
+            <div className="flex items-center gap-3 mt-4">
               <Image
                 src={Profile}
                 alt={post.author}
                 width={50}
-                height={10}
-                className="rounded-full"
+                height={90}
+                className="rounded-full object-cover"
               />
-              <span className="text-sm font-medium">{post.author}</span>
-              <span className="text-sm text-gray-700">{post.date}</span>
+              <div className="flex gap-6 justify-evenly">
+                <span className="text-sm font-medium">{post.author}</span>
+                <span className="text-sm text-gray-700">{post.date}</span>
+              </div>
             </div>
+
           </div>
         ))}
       </div>

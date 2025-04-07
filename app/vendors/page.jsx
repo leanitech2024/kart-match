@@ -41,17 +41,25 @@ const Vendors = () => {
                     </center>
 
                     {/* Search bar */}
-                    <div className="flex items-center gap-2 mt-8 bg-white rounded-md p-3 shadow-md">
-                        <FaLocationDot className="text-red-500" size={24} />
-                        <input
-                            className="flex-grow px-4 py-3 text-sm rounded-md bg-gray-200 text-gray-700 outline-none focus:ring-2 focus:ring-[#3FA025]"
-                            type="text"
-                            placeholder="Search for vendors"
-                        />
-                        <button className="bg-gradient-to-r from-[#FF7A7A] to-[#F71010] text-white px-6 py-3 rounded-md flex items-center gap-2 shadow-md hover:opacity-90">
+                    <div className="flex flex-col sm:flex-row items-center gap-3 mt-8 bg-white rounded-md p-3 shadow-md w-full max-w-5xl mx-auto">
+                     
+                        <div className="relative w-full flex-grow">
+                            <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-red-500">
+                                <FaLocationDot size={20} />
+                            </span>
+                            <input
+                                type="text"
+                                placeholder="Search for vendors"
+                                className="pl-10 pr-4 py-3 w-full text-sm rounded-md bg-gray-200 text-gray-700 outline-none focus:ring-2 focus:ring-[#3FA025]"
+                            />
+                        </div>
+
+                        {/* Search Button */}
+                        <button className="bg-gradient-to-r from-[#FF7A7A] to-[#F71010] text-white px-6 py-3 rounded-md flex items-center gap-2 shadow-md hover:opacity-90 w-full sm:w-auto justify-center">
                             <CiSearch size={20} /> Search
                         </button>
                     </div>
+
 
                     {/* Search by category */}
                     <div className="flex justify-between items-center mt-6">
@@ -84,14 +92,14 @@ const Vendors = () => {
                         ))}
                     </div>
                     {/* Vendor Card */}
-                    
-                  <div className="mb-10" >
-                  <VendorCard/>
-                  </div>
+
+                    <div className="mb-10" >
+                        <VendorCard />
+                    </div>
 
                 </div>
             </div>
-            <Footer/>
+            <Footer />
         </>
     );
 };

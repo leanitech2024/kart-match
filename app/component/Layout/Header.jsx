@@ -62,7 +62,7 @@ const Header = () => {
             className="w-16 h-16 transition-all duration-300"
           />
         </Link>
-        <button className="text-black p-2 border rounded-md " onClick={() => setIsOpen(true)}>
+        <button className="text-black p-2 border border-gray-300 rounded-md " onClick={() => setIsOpen(true)}>
           <FaBars size={34} />
         </button>
       </div>

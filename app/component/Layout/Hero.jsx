@@ -6,7 +6,7 @@ import Hero3 from '../../../public/assets/speech-bubble.png';
 
 const Hero = () => {
   return (
-    <section className="bg-[#F51F1F] min-h-[740px] w-full flex items-center justify-center px-4 md:px-10 lg:px-16 py-12 overflow-hidden">
+    <section className="bg-[#F51F1F] min-h-screen w-full flex items-center justify-center px-4 md:px-10 lg:px-16 py-12 overflow-hidden">
 
       <div className="flex flex-col-reverse lg:flex-row items-center justify-between w-full max-w-6xl mx-auto relative">
         {/* Left Side Content */}
@@ -42,7 +42,7 @@ const Hero = () => {
             </div>
           </div>
 
-          <Image src={Hero2} alt="Hero 2" width={550} height={850} className="relative z-10 mt-20 md:mt-45 md:mr-20" />
+          <Image src={Hero2} alt="Hero 2" width={550} height={850} className="relative z-10 mt-30 md:mt-45 md:mr-20" />
         </div>
       </div>
     </section>
