@@ -8,13 +8,14 @@ const cardData = [
     image: Hand,
     title: "HYGIENE",
     description: "Good hygiene is the secret ingredient in every perfect plate of chaat!",
-    color: "#F71010",
+    color: "#3FA025",
   },
   {
     image: Tongue,
     title: "TASTE",
     description: "It's the ultimate balance of flavors, isn't it?",
-    color: "#FF9534",
+    color: "#3FA025",
+    scaleUp: true,
   },
   {
     image: Man,
@@ -40,7 +41,13 @@ const Preferences = () => {
             className="flex flex-col items-center justify-center h-60 w-70 rounded-4xl shadow-lg cursor-pointer hover:shadow-2xl transition-all duration-300"
             style={{ backgroundColor: item.color }}
           >
-            <Image src={item.image} alt={item.title} width={40} height={40} className="object-contain" />
+            <Image
+              src={item.image}
+              alt={item.title}
+              width={item.title === "TASTE" ? 80 : 40}
+              height={item.title === "TASTE" ? 20 : 40}
+              className="object-contain"
+            />
             <h2 className="text-xl text-white font-semibold mt-4">{item.title}</h2>
             <p className="text-lg text-white px-4 mt-2">{item.description}</p>
           </div>
