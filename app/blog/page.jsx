@@ -60,8 +60,8 @@ const blog = () => {
 
             <div className="bg-gray-100 mt-24 min-h-screen shadow-lg ">
                 <div className=" ">
-                    <center className="mx-auto p-4">
-                        <h1 className="text-3xl font-semibold text-[#22343DCC] font-Poppins">
+                    <center className="mx-auto p-4 mt-6">
+                        <h1 className="text-3xl mt-6 font-semibold text-[#22343DCC] font-Poppins">
                             OUR <span className="text-[#3FA025]">BLOG</span>
                         </h1>
                     </center>

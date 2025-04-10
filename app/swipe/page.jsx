@@ -14,7 +14,7 @@ const Swipe = () => {
                 <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
                     
                     {/* Heading Section */}
-                    <div className="text-center">
+                    <div className="text-center mt-6">
                         <h1 className="text-3xl sm:text-4xl font-semibold text-[#22343DCC] font-Poppins">
                             LET'S <span className="text-[#3FA025]">SWIPE</span>
                         </h1>

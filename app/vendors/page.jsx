@@ -33,15 +33,15 @@ const Vendors = () => {
         <>
             <Header />
             <div className="bg-gray-100 mt-24 min-h-screen shadow-lg ">
-                <div className="max-w-6xl mx-auto p-4 ">
+                <div className="max-w-6xl mx-auto p-4 mt-4 ">
                     <center>
-                        <h1 className="text-3xl font-semibold text-[#22343DCC] font-Poppins">
+                        <h1 className="text-3xl font-semibold mt-4 text-[#22343DCC] font-Poppins">
                             DISCOVER <span className="text-[#3FA025]">VENDORS</span>
                         </h1>
                     </center>
 
                     {/* Search bar */}
-                    <div className="flex flex-col sm:flex-row items-center gap-3 mt-8 bg-white rounded-md p-3 shadow-md w-full max-w-5xl mx-auto">
+                    <div className="flex flex-col sm:flex-row items-center gap-3 mt-10 bg-white rounded-md p-3 shadow-md w-full max-w-6xl mx-auto">
                      
                         <div className="relative w-full flex-grow">
                             <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-red-500">
@@ -62,7 +62,7 @@ const Vendors = () => {
 
 
                     {/* Search by category */}
-                    <div className="flex justify-between items-center mt-6">
+                    <div className="flex justify-between items-center p-4 mt-6">
                         <h1 className="text-2xl font-semibold text-[#22343DCC] font-Poppins">
                             Search By <span className="text-[#3FA025]">Category</span>
                         </h1>
