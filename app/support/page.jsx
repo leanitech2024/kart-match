@@ -10,7 +10,8 @@ export default function DonationForm() {
         firstName: '',
         lastName: '',
         email: '',
-        message: ''
+        message: '',
+        mark: false,
     });
 
     const handleChange = (e) => {
@@ -51,7 +52,7 @@ export default function DonationForm() {
     return (
         <>
             <Header />
-            <Toaster position="top-right" reverseOrder={false} />
+            <Toaster position="top-center" reverseOrder={false} />
             <div className="bg-gray-100 mt-24 min-h-screen">
                 <div className="max-w-4xl mx-auto p-6">
                     <div className="text-center mt-6">
