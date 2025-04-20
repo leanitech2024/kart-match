@@ -21,7 +21,7 @@ export default function DonationForm() {
         e.preventDefault();
 
         try {
-            const res = await fetch('https://kartmatch-backend.onrender.com/api/support/submit', {
+            const res = await fetch('https://kartmatch-backend.onrender.com/api/forms/submit', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
