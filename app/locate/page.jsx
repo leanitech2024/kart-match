@@ -189,7 +189,7 @@ const Location = () => {
     try {
       const response = await fetch(`https://kartmatch-backend.onrender.com/api/nearby?lat=${lat}&lng=${lng}&radius=${radius}`);
       const data = await response.json();
-
+      console.log("Data" , data)
       if (data.success) {
         setVendorData(data.data);
       } else {
@@ -392,7 +392,7 @@ const Location = () => {
                     0.5km
                   </span>
                   <div className="flex flex-col sm:flex-row gap-2">
-                    <Link href={`/locate/${vendor.id}`}>
+                    <Link href={`/locate/${vendor._id}`}>
                       <button className="px-4 py-2 border border-gray-900 font-bold rounded-lg text-sm">
                         Details
                       </button>

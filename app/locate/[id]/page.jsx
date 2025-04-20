@@ -1,16 +1,17 @@
 'use client';
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import { FaMapMarkerAlt, FaRegHeart } from "react-icons/fa";
 import { PiForkKnifeBold } from "react-icons/pi";
 import { MdOutlineCleanHands } from "react-icons/md";
 import { RiTeamLine } from "react-icons/ri";
 import Header from '../../component/Layout/Header';
 import Footer from '../../component/Layout/Footer';
-
+import { useParams } from 'next/navigation'; 
 // StarRating Component
 const StarRating = ({ rating }) => {
-  const filledStars = Math.floor(rating);
-  const halfStar = rating - filledStars >= 0.5;
+  const parsedRating = parseFloat(rating) || 0; // parse "5 star" → 5
+  const filledStars = Math.floor(parsedRating);
+  const halfStar = parsedRating - filledStars >= 0.5;
   const totalStars = 5;
 
   return (
@@ -25,9 +26,14 @@ const StarRating = ({ rating }) => {
     </div>
   );
 };
-
 const VendorDetails = () => {
+  const [vendor, setVendor] = useState(null);
   const [comment, setComment] = useState("");
+  const params = useParams(); // get the vendorId from URL
+  const vendorId = params.id; 
+
+  console.log("Vendors" , vendor)
+
 
   const handleCommentSubmit = () => {
     if (comment.trim()) {
@@ -36,19 +42,23 @@ const VendorDetails = () => {
     }
   };
 
-  const vendor = {
-    name: "Subhash Papad wala",
-    image:"https://res.cloudinary.com/dlpm03ztl/image/upload/v1729963152/exmd5bmtkqgmr5msherf.webp",
-    lat: 22.568462,
-    lng: 88.359920,
-    foodItems: ["Papad wala", "Puchka Packet"],
-    ratings: {
-      taste: 4,
-      hygiene: 3.5,
-      hospitality: 4,
-    },
-  };
+   useEffect(() => {
+    const fetchVendor = async () => {
+      try {
+        const res = await fetch(`https://kartmatch-backend.onrender.com/api/vendors/${vendorId}`);
+    
+        if (!res.ok) throw new Error("Failed to fetch vendor");
+        const data = await res.json();
+      //  console.log("Data" , data)
+        setVendor(data); // assuming backend responds with { vendor: {...} }
+      } catch (err) {
+        console.error("Error fetching vendor:", err);
+      }
+    };
 
+    if (vendorId) fetchVendor();
+  }, [vendorId]);
+  if (!vendor) return <div className="text-center py-20">Loading vendor details...</div>;
   return (
     <>
       <Header />
@@ -61,16 +71,16 @@ const VendorDetails = () => {
           </h2>
 
           <img
-            src={vendor.image}
-            alt={vendor.name}
+            src={vendor.data.photoUrl}
+            alt={vendor.data.name}
             className="w-94 h-64 object-cover rounded-md mb-6"
           />
 
-          <h3 className="text-xl font-semibold text-center mb-2">{vendor.name}</h3>
+          <h3 className="text-xl font-semibold text-center mb-2">{vendor.data.name}</h3>
 
           <p className="flex justify-center items-center text-gray-600 mb-6 gap-2 text-xl font-bold sm:text-base">
             <FaMapMarkerAlt size={20} className="text-red-500" />
-            Lat: {vendor.lat}, Lng: {vendor.lng}
+            Lat: {vendor.data.location.coordinates[0]}, Lng: {vendor.data.location.coordinates[1]}
           </p>
 
           {/* Ratings */}
@@ -78,32 +88,36 @@ const VendorDetails = () => {
             <div className="flex flex-col items-center bg-gray-50 p-4 rounded-lg shadow w-28">
               <PiForkKnifeBold size={24} />
               <p className="text-xs mt-1">Taste</p>
-              <StarRating rating={vendor.ratings.taste} />
+              <StarRating rating={vendor?.data.tasteRating} />
             </div>
             <div className="flex flex-col items-center bg-gray-50 p-4 rounded-lg shadow w-28">
               <MdOutlineCleanHands size={24} />
               <p className="text-xs mt-1">Hygiene</p>
-              <StarRating rating={vendor.ratings.hygiene} />
+              <StarRating rating={vendor?.data.hygieneRating} />
             </div>
             <div className="flex flex-col items-center bg-gray-50 p-4 rounded-lg shadow w-28">
               <RiTeamLine size={24} />
               <p className="text-xs mt-1">Hospitality</p>
-              <StarRating rating={vendor.ratings.hospitality} />
+              <StarRating rating={vendor?.data.hospitalityRating} />
             </div>
           </div>
 
           {/* Food Items */}
           <h4 className="text-lg font-semibold mb-3 text-center">Food Items</h4>
           <div className="flex justify-center flex-wrap gap-2 mb-6">
-            {vendor.foodItems.map((item, index) => (
-              <span
-                key={index}
-                className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full shadow-sm"
-              >
-                {item}
-              </span>
-            ))}
-          </div>
+  {Array.isArray(vendor.data.foodItems) &&
+    vendor.data.foodItems.flatMap((item) =>
+      item?.split('/').map((subItem, index) => (
+        <span
+          key={subItem + index}
+          className="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full shadow-sm"
+        >
+          {subItem.trim()}
+        </span>
+      ))
+    )}
+</div>
+
 
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row justify-center gap-4 mb-6">
