@@ -1,19 +1,73 @@
+'use client';
+import { useState, useEffect } from 'react';
 import Header from '../component/Layout/Header';
+import Footer from '../component/Layout/Footer';
+import SwipeCard from '../component/Card/swipeCard';
 import { PiForkKnifeBold } from "react-icons/pi";
 import { IoShieldCheckmarkOutline } from "react-icons/io5";
 import { FaRegHeart } from "react-icons/fa";
-import Footer from '../component/Layout/Footer';
 import { IoMdShuffle } from "react-icons/io";
-import SwipeCard from '../component/Card/swipeCard';
 
 const Swipe = () => {
+    const [vendors, setVendors] = useState([]);
+    const [preferences, setPreferences] = useState([]);
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const fetchVendors = async () => {
+        try {
+            const response = await fetch('https://kartmatch-backend.onrender.com/api/vendors/filter', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ preferences }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setVendors(data.data || []);
+                setCurrentIndex(0); // Reset index when new vendors arrive
+            } else {
+                console.error('Failed to fetch vendors:', response.status, response.statusText);
+            }
+        } catch (err) {
+            console.error("Error fetching vendors:", err);
+        }
+    };
+
+    useEffect(() => {
+        if (preferences.length === 2) {
+            fetchVendors();
+        }
+    }, [preferences]);
+
+    const handlePreferenceClick = (preference) => {
+        setPreferences(prev =>
+            prev.includes(preference)
+                ? prev.filter(item => item !== preference)
+                : prev.length < 2
+                    ? [...prev, preference]
+                    : prev
+        );
+    };
+
+    const handleSkip = () => {
+        if (currentIndex < vendors.length - 1) {
+            setCurrentIndex(currentIndex + 1);
+        }
+    };
+
+    const handleShuffle = () => {
+        if (vendors.length > 1) {
+            const shuffled = [...vendors].sort(() => 0.5 - Math.random());
+            setVendors(shuffled);
+            setCurrentIndex(0);
+        }
+    };
+
     return (
         <>
             <Header />
             <div className="bg-gray-100 pt-28 min-h-screen w-full">
                 <div className="max-w-6xl mx-auto px-4 md:px-6 lg:px-8">
-                    
-                    {/* Heading Section */}
                     <div className="text-center mt-6">
                         <h1 className="text-3xl sm:text-4xl font-semibold text-[#22343DCC] font-Poppins">
                             LET'S <span className="text-[#3FA025]">SWIPE</span>
@@ -23,35 +77,48 @@ const Swipe = () => {
                         </h2>
                     </div>
 
-                    {/* Preference Buttons */}
                     <div className="flex flex-wrap justify-center gap-4 mt-10">
-                        <button className="px-6 py-2 bg-gradient-to-r from-[#FF384A] to-[#FF5463] text-white rounded-3xl text-sm md:text-md flex items-center gap-2 drop-shadow-[0_4px_6px_rgba(255,56,74,0.5)]">
-                            <PiForkKnifeBold size={20} /> Taste
-                        </button>
-                        <button className="px-6 py-2 bg-gradient-to-r from-[#FF384A] to-[#FF5463] text-white rounded-3xl text-sm md:text-md flex items-center gap-2 drop-shadow-[0_4px_6px_rgba(255,56,74,0.5)]">
-                            <IoShieldCheckmarkOutline size={20} /> Hygiene
-                        </button>
-                        <button className="px-6 py-2 bg-gradient-to-r from-[#FF384A] to-[#FF5463] text-white rounded-3xl text-sm md:text-md flex items-center gap-2 drop-shadow-[0_4px_6px_rgba(255,56,74,0.5)]">
-                            <FaRegHeart size={20} /> Hospitality
-                        </button>
+                        {['Taste', 'Hygiene', 'Hospitality'].map(pref => (
+                            <button
+                                key={pref}
+                                className={`px-6 py-2 ${preferences.includes(pref) ? 'bg-[#FF384A]' : 'bg-gradient-to-r from-[#FF384A] to-[#FF5463]'} text-white rounded-3xl text-sm md:text-md flex items-center gap-2 drop-shadow-[0_4px_6px_rgba(255,56,74,0.5)]`}
+                                onClick={() => handlePreferenceClick(pref)}
+                            >
+                                {pref === 'Taste' && <PiForkKnifeBold size={20} />}
+                                {pref === 'Hygiene' && <IoShieldCheckmarkOutline size={20} />}
+                                {pref === 'Hospitality' && <FaRegHeart size={20} />}
+                                {pref}
+                            </button>
+                        ))}
                     </div>
 
-                    {/* Description Text */}
                     <p className="text-center text-sm md:text-base mt-6 font-semibold">
                         Vendors will be sorted based on your preferences
                     </p>
 
-                    {/* Shuffle Section */}
-                    <div className="flex flex-col md:flex-row items-center justify-between mt-10 gap-4">
-                        <div className="text-base font-semibold">Vendor 1 of 225</div>
-                        <button className="px-6 py-2 bg-gradient-to-r from-[#FF384A] to-[#FF5463] text-white rounded-3xl text-sm md:text-md flex items-center gap-2 drop-shadow-[0_4px_6px_rgba(255,56,74,0.5)]">
-                            <IoMdShuffle size={20} /> Shuffle
-                        </button>
-                    </div>
+                    {/* Shuffle & Vendor Count */}
+                    {vendors.length > 0 && (
+                        <div className="flex flex-col md:flex-row items-center justify-between mt-10 gap-4">
+                            <div className="text-base font-semibold">
+                                Vendor {currentIndex + 1} of {vendors.length}
+                            </div>
+                            <button
+                                className="px-6 py-2 bg-gradient-to-r from-[#FF384A] to-[#FF5463] text-white rounded-3xl text-sm md:text-md flex items-center gap-2 drop-shadow-[0_4px_6px_rgba(255,56,74,0.5)]"
+                                onClick={handleShuffle}
+                            >
+                                <IoMdShuffle size={20} /> Shuffle
+                            </button>
+                        </div>
+                    )}
 
                     {/* Swipe Card */}
-                    <div className="py-10">
-                        <SwipeCard />
+                    <div className="mt-10 flex justify-center">
+                        <SwipeCard
+                            vendors={vendors}
+                            preferences={preferences}
+                            currentIndex={currentIndex}
+                            handleSkip={handleSkip}
+                        />
                     </div>
                 </div>
             </div>

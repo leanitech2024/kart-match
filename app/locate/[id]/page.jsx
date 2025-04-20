@@ -131,13 +131,13 @@ const VendorDetails = () => {
                   if (!vendor) return;
 
                   const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
-                  const alreadyFavorited = storedFavorites.find((fav) => fav.data._id === vendor.data._id);
+                  const alreadyFavorited = storedFavorites.find((fav) => fav._id === vendor.data._id);
 
                   if (alreadyFavorited) {
                   //  alert('Vendor already in favorites!');
                     toast.apply('Vendor already in favorites!');
                   } else {
-                    storedFavorites.push(vendor);
+                    storedFavorites.push(vendor.data);
                     localStorage.setItem('favorites', JSON.stringify(storedFavorites));
                     setIsFavorited(true); 
                     toast.success('Vendor added to favorites!');

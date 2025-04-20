@@ -10,7 +10,7 @@ const FavouriteCard = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(true);
     const itemsPerPage = 9;
-
+    console.log("fav", vendorsData)
     useEffect(() => {
         const fetchData = () => {
             setLoading(true);
@@ -18,7 +18,7 @@ const FavouriteCard = () => {
             const storedFavorites = localStorage.getItem("favorites");
             if (storedFavorites) {
                 const parsedFavorites = JSON.parse(storedFavorites);
-                console.log("fav", parsedFavorites)
+               
                 setVendorsData(parsedFavorites); // Set vendors data directly from favorites
             }
 
@@ -39,7 +39,7 @@ const FavouriteCard = () => {
         const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
         const updatedFavorites = storedFavorites.filter(
-            (fav) => fav.data._id !== vendorId
+            (fav) => fav._id !== vendorId
         );
 
         localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
@@ -57,50 +57,50 @@ const FavouriteCard = () => {
                     <div className="flex flex-wrap justify-center gap-14 mt-10 max-w-7xl bg-gray-100">
                         {paginatedVendors.map((vendor) => (
                             <div
-                                key={vendor?.data._id || vendor.data.id}
+                                key={vendor?._id || vendor.id}
                                 className="w-80 border bg-gray-100 border-none shadow-[6px_6px_10px_rgba(0,0,0,0.2)] rounded-xl p-4 relative"
                             >
                                 <div className="relative w-full h-54 rounded-lg overflow-hidden">
                                     <Image
-                                        src={vendor?.data?.photoUrl}
-                                        alt={vendor?.data?.name}
+                                        src={vendor?.photoUrl}
+                                        alt={vendor?.name}
                                         layout="fill"
                                         objectFit="cover"
                                         className="rounded-lg"
                                     />
                                     <span className="absolute top-2 left-2 bg-white/40 backdrop-blur-sm text-red-500 text-sm font-bold px-3 py-1 rounded-lg">
-                                        {vendor?.data?.name}
+                                        {vendor?.name}
                                     </span>
                                 </div>
 
                                 <div className="mt-4">
                                     <div className="flex justify-between items-center">
-                                        <h2 className="text-lg font-semibold">{vendor?.data?.name}</h2>
+                                        <h2 className="text-lg font-semibold">{vendor?.name}</h2>
                                         {/* {console.log("Vendor data" , vendor?.data._id)} */}
-                                        <div onClick={() => handleRemoveFavourite(vendor?.data?._id)} className="cursor-pointer">
+                                        <div onClick={() => handleRemoveFavourite(vendor?._id)} className="cursor-pointer">
                                             <FaHeart color="red" size="25" className="text-red-600" />
                                         </div>
                                     </div>
 
                                     <div className="flex justify-start gap-3 text-md font-bold text-gray-800 mt-4">
                                         <span className="flex items-center">
-                                            <PiForkKnifeBold size="25" className="text-orange-500" /> {vendor?.data?.tasteRating[0]}/5
+                                            <PiForkKnifeBold size="25" className="text-orange-500" /> {vendor?.tasteRating[0]}/5
                                         </span>
                                         <span className="flex items-center gap-1">
-                                            <FaRegStar size="25" className="text-yellow-500" /> {vendor?.data?.hygieneRating[0]}/5
+                                            <FaRegStar size="25" className="text-yellow-500" /> {vendor?.hygieneRating[0]}/5
                                         </span>
                                         <span className="flex items-center gap-1">
-                                            <FaRegHeart size="25" className="text-orange-400" /> {vendor?.data?.hospitalityRating[0]}/5
+                                            <FaRegHeart size="25" className="text-orange-400" /> {vendor?.hospitalityRating[0]}/5
                                         </span>
                                     </div>
 
                                     <div className="mt-4 flex flex-wrap gap-1">
-                                        {vendor?.data?.foodItems?.slice(0, 2).map((item, index) => (
+                                        {vendor?.foodItems?.slice(0, 2).map((item, index) => (
                                             <span key={index} className="bg-yellow-200 text-gray-800 px-2 py-1 text-xs rounded-full">
                                                 {item}
                                             </span>
                                         ))}
-                                        {vendor?.data?.foodItems?.length > 2 && (
+                                        {vendor?.foodItems?.length > 2 && (
                                             <span className="bg-gray-200 text-gray-700 px-2 py-1 text-xs rounded-full">
                                                 +{vendor.foodItems.length - 2} more
                                             </span>
