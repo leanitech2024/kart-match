@@ -77,11 +77,11 @@ const Swipe = () => {
                         </h2>
                     </div>
 
-                    <div className="flex flex-wrap justify-center gap-4 mt-10">
+                    <div className="flex flex-wrap justify-center gap-4 mt-10 ">
                         {['Taste', 'Hygiene', 'Hospitality'].map(pref => (
                             <button
                                 key={pref}
-                                className={`px-6 py-2 ${preferences.includes(pref) ? 'bg-[#FF384A]' : 'bg-gradient-to-r from-[#FF384A] to-[#FF5463]'} text-white rounded-3xl text-sm md:text-md flex items-center gap-2 drop-shadow-[0_4px_6px_rgba(255,56,74,0.5)]`}
+                                className={`px-6 py-2 ${preferences.includes(pref) ? 'bg-[#FF384A] cursor-pointer hover:bg-white hover:text-black ' : 'bg-gradient-to-r hover:bg-white hover:text-black cursor-pointer from-[#FF384A] to-[#FF5463]'} text-white rounded-3xl text-sm md:text-md flex items-center gap-2 drop-shadow-[0_4px_6px_rgba(255,56,74,0.5)]`}
                                 onClick={() => handlePreferenceClick(pref)}
                             >
                                 {pref === 'Taste' && <PiForkKnifeBold size={20} />}
@@ -103,7 +103,7 @@ const Swipe = () => {
                                 Vendor {currentIndex + 1} of {vendors.length}
                             </div>
                             <button
-                                className="px-6 py-2 bg-gradient-to-r from-[#FF384A] to-[#FF5463] text-white rounded-3xl text-sm md:text-md flex items-center gap-2 drop-shadow-[0_4px_6px_rgba(255,56,74,0.5)]"
+                                className="px-6 py-2 bg-gradient-to-r cursor-pointer from-[#FF384A] to-[#FF5463] text-white rounded-3xl text-sm md:text-md flex items-center gap-2 drop-shadow-[0_4px_6px_rgba(255,56,74,0.5)]"
                                 onClick={handleShuffle}
                             >
                                 <IoMdShuffle size={20} /> Shuffle

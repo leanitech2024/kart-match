@@ -66,7 +66,7 @@ const [isFavorited, setIsFavorited] = useState(false);
                         <div className="flex justify-between text-md font-bold text-gray-800 mt-4">
                             {/* Taste */}
                             <div className="flex flex-col items-center bg-gray-200 p-2 rounded-lg">
-                                <div className="flex  items-center gap-1  rounded-xl">
+                                <div className="flex  items-center gap-1  rounded-xl ">
                                     <div>
                                         <PiForkKnifeBold size={20} className="text-orange-500" />
                                     </div>
@@ -131,6 +131,7 @@ const [isFavorited, setIsFavorited] = useState(false);
                                 const alreadyFavorited = storedFavorites.find((fav) => fav._id === currentVendor._id);
 
                                 if (alreadyFavorited) {
+
                                     toast.error('Vendor already in favorites!');
                                 } else {
                                     storedFavorites.push(currentVendor);

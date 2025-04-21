@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { PiForkKnifeBold } from "react-icons/pi";
 import { FaHeart, FaRegStar, FaRegHeart } from "react-icons/fa";
 import { CiLocationArrow1 } from "react-icons/ci";
-
+import Link from "next/link";
 const FavouriteCard = () => {
     const [vendorsData, setVendorsData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -18,7 +18,7 @@ const FavouriteCard = () => {
             const storedFavorites = localStorage.getItem("favorites");
             if (storedFavorites) {
                 const parsedFavorites = JSON.parse(storedFavorites);
-               
+
                 setVendorsData(parsedFavorites); // Set vendors data directly from favorites
             }
 
@@ -69,13 +69,20 @@ const FavouriteCard = () => {
                                         className="rounded-lg"
                                     />
                                     <span className="absolute top-2 left-2 bg-white/40 backdrop-blur-sm text-red-500 text-sm font-bold px-3 py-1 rounded-lg">
-                                        {vendor?.name}
+                                        {vendor?.name?.length > 20
+                                            ? vendor.name.slice(0, 20) + "..."
+                                            : vendor?.name}
                                     </span>
+
                                 </div>
 
                                 <div className="mt-4">
                                     <div className="flex justify-between items-center">
-                                        <h2 className="text-lg font-semibold">{vendor?.name}</h2>
+                                        <h2 className="text-lg font-semibold">
+                                            {vendor?.name?.length > 20
+                                                ? vendor.name.slice(0, 20) + "..."
+                                                : vendor?.name}
+                                        </h2>
                                         {/* {console.log("Vendor data" , vendor?.data._id)} */}
                                         <div onClick={() => handleRemoveFavourite(vendor?._id)} className="cursor-pointer">
                                             <FaHeart color="red" size="25" className="text-red-600" />
@@ -108,10 +115,12 @@ const FavouriteCard = () => {
                                     </div>
 
                                     <div className="mt-6 flex justify-between">
-                                        <button className="px-4 py-2 border border-gray-900 font-bold rounded-lg text-sm">
-                                            Details
-                                        </button>
-                                        <button className="px-4 py-2 bg-[#3FA025] text-white rounded-lg text-sm flex items-center gap-2">
+                                        <Link href={`/locate/${vendor._id}`}>
+                                            <button className="px-4 py-2 border cursor-pointer border-gray-900 font-bold rounded-lg text-sm">
+                                                Details
+                                            </button>
+                                        </Link>
+                                        <button className="px-4 py-2 bg-[#3FA025] cursor-pointer text-white rounded-lg text-sm flex items-center gap-2">
                                             <CiLocationArrow1 color="white" size={20} /> Locate
                                         </button>
                                     </div>
