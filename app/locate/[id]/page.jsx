@@ -8,6 +8,7 @@ import Header from '../../component/Layout/Header';
 import Footer from '../../component/Layout/Footer';
 import { useParams } from 'next/navigation';
 import toast from "react-hot-toast";
+
 // StarRating Component
 const StarRating = ({ rating }) => {
   const parsedRating = parseFloat(rating) || 0; // parse "5 star" → 5
@@ -27,6 +28,7 @@ const StarRating = ({ rating }) => {
     </div>
   );
 };
+
 const VendorDetails = () => {
   const [vendor, setVendor] = useState(null);
   const [comment, setComment] = useState("");
@@ -35,24 +37,12 @@ const VendorDetails = () => {
   const params = useParams(); // get the vendorId from URL
   const vendorId = params.id;
 
-  console.log("Vendors", vendor)
-
-
-  const handleCommentSubmit = () => {
-    if (comment.trim()) {
-      alert("Comment submitted: " + comment);
-      setComment("");
-    }
-  };
-
   useEffect(() => {
     const fetchVendor = async () => {
       try {
         const res = await fetch(`https://kartmatch-backend.onrender.com/api/vendors/${vendorId}`);
-
         if (!res.ok) throw new Error("Failed to fetch vendor");
         const data = await res.json();
-        //  console.log("Data" , data)
         setVendor(data); // assuming backend responds with { vendor: {...} }
       } catch (err) {
         console.error("Error fetching vendor:", err);
@@ -61,13 +51,50 @@ const VendorDetails = () => {
 
     if (vendorId) fetchVendor();
   }, [vendorId]);
+
+  // Check if the vendor is already favorited
+  useEffect(() => {
+    const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const alreadyFavorited = storedFavorites.some((fav) => fav._id === vendorId);
+    setIsFavorited(alreadyFavorited);
+  }, [vendorId]);
+
+  const handleCommentSubmit = () => {
+    if (comment.trim()) {
+      alert("Comment submitted: " + comment);
+      setComment("");
+    }
+  };
+
+  const handleFavoriteClick = () => {
+    if (!vendor) return;
+
+    const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const alreadyFavorited = storedFavorites.some((fav) => fav._id === vendorId);
+
+    if (alreadyFavorited) {
+      // Remove vendor from favorites
+      const updatedFavorites = storedFavorites.filter((fav) => fav._id !== vendorId);
+      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+      setIsFavorited(false);
+      toast.success('Vendor removed from favorites!');
+    } else {
+      // Add vendor to favorites
+      storedFavorites.push(vendor.data);
+      localStorage.setItem('favorites', JSON.stringify(storedFavorites));
+      setIsFavorited(true);
+      toast.success('Vendor added to favorites!');
+    }
+  };
+
   if (!vendor) return <div className="text-center py-20">Loading vendor details...</div>;
+
   return (
     <>
       <Header />
-      <div className="bg-gray-100  px-4 py-6 sm:px-6 lg:px-8">
+      <div className="bg-gray-100 px-4 py-6 sm:px-6 lg:px-8">
         <center>
-          <div className=" rounded-xl max-w-4xl mx-auto mt-24 bg-gray-100">
+          <div className="rounded-xl max-w-4xl mx-auto mt-24 bg-gray-100">
             <h2 className="text-3xl font-bold text-center mb-6">
               <span className="text-gray-700">VENDOR </span>
               <span className="text-green-600">DETAILS</span>
@@ -121,32 +148,15 @@ const VendorDetails = () => {
                 )}
             </div>
 
-
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row justify-center gap-4 mb-6">
               <button
                 className={`flex items-center justify-center gap-2 border ${isFavorited ? 'border-red-600 text-red-600' : 'border-red-500 text-red-500'
                   } px-5 py-2 rounded-full hover:bg-red-50 transition`}
-                onClick={() => {
-                  if (!vendor) return;
-
-                  const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
-                  const alreadyFavorited = storedFavorites.find((fav) => fav._id === vendor.data._id);
-
-                  if (alreadyFavorited) {
-                  //  alert('Vendor already in favorites!');
-                    toast.apply('Vendor already in favorites!');
-                  } else {
-                    storedFavorites.push(vendor.data);
-                    localStorage.setItem('favorites', JSON.stringify(storedFavorites));
-                    setIsFavorited(true); 
-                    toast.success('Vendor added to favorites!');
-                    // alert('Vendor added to favorites!');
-                  }
-                }}
+                onClick={handleFavoriteClick}
               >
                 {isFavorited ? (
-                  <FaHeart className="fill-red-600" /> // filled heart look
+                  <FaHeart className="fill-red-600" />
                 ) : (
                   <FaRegHeart />
                 )}
@@ -154,13 +164,13 @@ const VendorDetails = () => {
               </button>
 
               <button className="bg-green-600 flex text-white px-5 py-2 rounded-full hover:bg-green-700 transition">
-                <FaMapMarkerAlt size={20} className="text-white mt-[3px] mr-2" />   View On Map
+                <FaMapMarkerAlt size={20} className="text-white mt-[3px] mr-2" /> View On Map
               </button>
             </div>
 
             {/* Comments */}
             <div>
-              <label className="block font-medium mb-2 left-0! text-gray-700">Comments</label>
+              <label className="block font-medium mb-2 text-gray-700">Comments</label>
               <textarea
                 className="w-full h-28 p-3 border border-gray-300 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-orange-400"
                 placeholder="Write your comments here..."

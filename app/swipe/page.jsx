@@ -7,13 +7,16 @@ import { PiForkKnifeBold } from "react-icons/pi";
 import { IoShieldCheckmarkOutline } from "react-icons/io5";
 import { FaRegHeart } from "react-icons/fa";
 import { IoMdShuffle } from "react-icons/io";
+import { FiLoader } from 'react-icons/fi'; 
 
 const Swipe = () => {
     const [vendors, setVendors] = useState([]);
     const [preferences, setPreferences] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [loading, setLoading] = useState(false); // Add loading state
 
     const fetchVendors = async () => {
+        setLoading(true); // Set loading to true when fetching
         try {
             const response = await fetch('https://kartmatch-backend.onrender.com/api/vendors/filter', {
                 method: 'POST',
@@ -30,6 +33,8 @@ const Swipe = () => {
             }
         } catch (err) {
             console.error("Error fetching vendors:", err);
+        } finally {
+            setLoading(false); // Set loading to false after fetch completes
         }
     };
 
@@ -96,8 +101,15 @@ const Swipe = () => {
                         Vendors will be sorted based on your preferences
                     </p>
 
+                    {/* Show loading spinner while fetching */}
+                    {loading && (
+                        <div className="flex justify-center mt-16">
+                            <FiLoader color="black" height={100} width={100} />
+                        </div>
+                    )}
+
                     {/* Shuffle & Vendor Count */}
-                    {vendors.length > 0 && (
+                    {vendors.length > 0 && !loading && (
                         <div className="flex flex-col md:flex-row items-center justify-between mt-10 gap-4">
                             <div className="text-base font-semibold">
                                 Vendor {currentIndex + 1} of {vendors.length}
