@@ -10,8 +10,8 @@ const Hero = () => {
 
       <div className="flex flex-col-reverse lg:flex-row items-center justify-between w-full max-w-6xl mx-auto relative">
         {/* Left Side Content */}
-        <div className="w-full lg:w-1/2 flex flex-col  md:justify-center gap-5 items-start relative h-[500px] lg:h-[550px]">
-      
+        <div className="w-full lg:w-1/2 flex flex-col  md:justify-center gap-5 items-start relative  lg:h-[550px]">
+
           <div className="z-10 mt-[-80px] -ml-[50px] hidden md:block">
             <Image src={Hero1} alt="Hero 1" width={200} height={250} />
           </div>
@@ -42,7 +42,8 @@ const Hero = () => {
             </div>
           </div>
 
-          <Image src={Hero2} alt="Hero 2" width={550} height={850} className="relative z-10 mt-30 md:mt-45 md:mr-20" />
+          <Image src={Hero2} alt="Hero 2" width={550} height={850} quality={100}
+            priority className="relative z-10 mt-30 md:mt-45 md:mr-20" />
         </div>
       </div>
     </section>

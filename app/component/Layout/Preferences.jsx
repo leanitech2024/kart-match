@@ -1,8 +1,8 @@
 'use client'
 import Image from "next/image";
-import Hand from "../../../public/assets/Hand.png";
-import Tongue from "../../../public/assets/Tongue.png";
-import Man from "../../../public/assets/Man.png";
+// import Hand from "../../../public/assets/Hand.png";
+// import Tongue from "../../../public/assets/Tongue.png";
+// import Man from "../../../public/assets/Man.png";
 import Lottie from "lottie-react";
 import a1 from '../../../Downloads/1.json'
 import a2 from '../../../Downloads/2.json'
@@ -42,7 +42,7 @@ const Preferences = () => {
         {cardData.map((item, index) => (
           <div
             key={index}
-            className="flex flex-col items-center justify-center h-min-content w-70 rounded-4xl shadow-lg cursor-pointer hover:shadow-2xl transition-all duration-300"
+            className="flex flex-col items-center p-2 h-min-content w-70 rounded-4xl shadow-lg cursor-pointer hover:shadow-2xl transition-all duration-300"
             style={{ backgroundColor: item.color }}
           >
             {/* <Image
@@ -59,8 +59,8 @@ const Preferences = () => {
         height={5}
         className="w-30 "
       />
-            <h2 className="text-xl text-white font-semibold mt-2">{item.title}</h2>
-            <p className="text-lg text-white px-4 mt-2">{item.description}</p>
+            <h2 className="text-xl text-white font-semibold ">{item.title}</h2>
+            <p className="text-lg text-white px-4 mt-3">{item.description}</p>
           </div>
         ))}
       </div>

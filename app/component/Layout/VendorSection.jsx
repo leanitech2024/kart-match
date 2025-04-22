@@ -1,36 +1,43 @@
+'use client'
 import Image from "next/image";
-import Vendor1 from '../../../public/assets/Vendor1.png'
-import Vendor2 from '../../../public/assets/Vendor2.png'
-import Vendor3 from '../../../public/assets/Vendor3.png'
-import Vendor4 from '../../../public/assets/Vendor4.png'
-import Vendor5 from '../../../public/assets/Vendor5.png'
+// import Vendor1 from '../../../public/assets/Vendor1.png'
+// import Vendor2 from '../../../public/assets/Vendor2.png'
+// import Vendor3 from '../../../public/assets/Vendor3.png'
+// import Vendor4 from '../../../public/assets/Vendor4.png'
+// import Vendor5 from '../../../public/assets/Vendor5.png'
+import a4 from '../../../Downloads/4.json'
+import a5 from '../../../Downloads/5.json'
+import a6 from '../../../Downloads/6.json'
+import a7 from '../../../Downloads/7.json'
+import a8 from '../../../Downloads/8.json'
+import Lottie from "lottie-react";
 const vendors = [
   {
-    image: Vendor1,
+    image: a4,
     title: "VADA PAU SELLER",
     item: "Vada Pau",
 
   },
   {
-    image: Vendor2,
+    image: a5,
     title: "GOOGHNI SELLER",
     item: "Googhni",
 
   },
   {
-    image: Vendor3,
+    image: a6,
     title: "DOSA SELLER",
     item: "Dosa and Idli",
   
   },
   {
-    image: Vendor4,
+    image: a7,
     title: "PUCHKA",
     item: "Chanachur Garam",
  
   },
   {
-    image: Vendor5,
+    image: a8,
     title: "CHANACHUR",
     item: "Chanachur Garam",
    
@@ -50,13 +57,20 @@ const VendorSection = () => {
         {vendors.map((vendor, index) => (
           <div key={index} className="text-center ">
             {/* Vendor Image */}
-            <div className="w-34 h-44 mx-auto ">
-              <Image
+            <div className="w-50  mx-auto ">
+              {/* <Image
                 src={vendor.image}
                 alt={vendor.title}
             
                 className="rounded-full object-cover"
-              />
+              /> */}
+                  <Lottie
+        animationData={vendor.image}
+        loop={true}
+        // width={5}
+        // height={5}
+        // className="w-30 "
+      />
             </div>
             {/* Vendor Card */}
             <div
