@@ -3,6 +3,7 @@ import Blog1 from '../../../public/assets/Blog1.png'
 import Blog3 from '../../../public/assets/Blog3.png'
 import Blog2 from '../../../public/assets/Blog4.png'
 import Profile from '../../../public/assets/Profile.png'
+import Link from "next/link";
 const blogPosts = [
   {
     image: Blog1,
@@ -32,9 +33,11 @@ const BlogSection = () => {
         <h2 className="text-3xl font-bold text-gray-600">
           FROM OUR <span className="text-green-600">BLOG</span>
         </h2>
-        <button className="bg-orange-500 text-white font-semibold px-6 py-2 rounded-lg hover:bg-orange-600">
+       <Link href='/blog'>
+        <button className="bg-orange-500 cursor-pointer text-white font-semibold px-6 py-2 rounded-lg hover:bg-orange-600">
           View All →
         </button>
+        </Link>
       </div>
 
       {/* Blog Cards */}
