@@ -8,6 +8,7 @@ const navItem = [
   { title: "Blog", href: "/blog" },
   { title: "Vendors", href: "/vendors" },
   { title: "Gallery", href: "/gallery" },
+  { title: "Favorite", href: "/favorite" },
   { title: "Let's Swipe", href: "/swipe" },
   { title: "Locate Us", href: "/locate" },
   { title: "Support Us", href: "/support" },

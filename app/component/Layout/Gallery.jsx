@@ -19,16 +19,16 @@ const Gallery = () => {
   return (
     <div className=" py-10 px-6  w-full">
       {/* Title Section */}
-    
-      <div className="flex justify-between items-center mb-8">
-      <h2 className="text-2xl sm:text-2xl md:text-3xl font-bold text-gray-600">
-  FROM OUR USER <span className="text-green-600">GALLERY</span>
-</h2>
 
-       <Link href='/blog'>
-        <button className="bg-orange-500 cursor-pointer text-white font-semibold px-6 py-2 rounded-lg hover:bg-orange-600">
-          View all →
-        </button>
+      <div className="flex justify-between items-center mb-8">
+        <h2 className="text-2xl sm:text-2xl md:text-3xl font-bold text-gray-600">
+          FROM OUR USER <span className="text-green-600">GALLERY</span>
+        </h2>
+
+        <Link href='/gallery'>
+          <button className="bg-orange-500 cursor-pointer text-white font-semibold px-6 py-2 rounded-lg hover:bg-orange-600">
+            View all →
+          </button>
         </Link>
       </div>
 
