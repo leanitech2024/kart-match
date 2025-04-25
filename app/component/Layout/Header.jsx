@@ -46,7 +46,7 @@ const Header = () => {
     <header
       className={`fixed top-0 w-full z-50 bg-white transition-all duration-300 ${
         isSticky ? "shadow-lg" : ""
-      }`}
+      } ${showHamburger ? "py-3" : "py-2"}`} // Adjust padding based on the state
     >
       {/* Desktop Header */}
       {!showHamburger && (

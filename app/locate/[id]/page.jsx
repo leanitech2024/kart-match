@@ -163,9 +163,11 @@ const VendorDetails = () => {
                 {isFavorited ? 'Favorited' : 'Add To Favorite'}
               </button>
 
-              <button className="bg-green-600 flex text-white px-5 py-2 rounded-full hover:bg-green-700 transition">
-                <FaMapMarkerAlt size={20} className="text-white mt-[3px] mr-2" /> View On Map
+              <button className="bg-green-600 flex items-center justify-center text-white px-5 py-2 rounded-full hover:bg-green-700 transition w-full sm:w-auto">
+                <FaMapMarkerAlt size={20} className="text-white mt-[3px] mr-2" />
+                <span className="text-sm sm:text-base">View On Map</span>
               </button>
+
             </div>
 
             {/* Comments */}

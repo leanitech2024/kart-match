@@ -7,11 +7,11 @@ import { PiForkKnifeBold } from "react-icons/pi";
 import { IoShieldCheckmarkOutline } from "react-icons/io5";
 import { FaRegHeart } from "react-icons/fa";
 import { IoMdShuffle } from "react-icons/io";
-import { FiLoader } from 'react-icons/fi'; 
+import { FiLoader } from 'react-icons/fi';
 
 const Swipe = () => {
     const [vendors, setVendors] = useState([]);
-    const [preferences, setPreferences] = useState([]);
+    const [preferences, setPreferences] = useState([]); // Track preferences state
     const [currentIndex, setCurrentIndex] = useState(0);
     const [loading, setLoading] = useState(false); // Add loading state
 
@@ -45,13 +45,18 @@ const Swipe = () => {
     }, [preferences]);
 
     const handlePreferenceClick = (preference) => {
-        setPreferences(prev =>
-            prev.includes(preference)
-                ? prev.filter(item => item !== preference)
-                : prev.length < 2
-                    ? [...prev, preference]
-                    : prev
-        );
+        setPreferences(prev => {
+            if (prev.includes(preference)) {
+                // Deselect preference if already selected
+                return prev.filter(item => item !== preference);
+            } else if (prev.length < 2) {
+                // Add preference if fewer than 2 are selected
+                return [...prev, preference];
+            } else {
+                // If 2 preferences are already selected, do nothing
+                return prev;
+            }
+        });
     };
 
     const handleSkip = () => {
@@ -60,13 +65,13 @@ const Swipe = () => {
         }
     };
 
-    const handleShuffle = () => {
-        if (vendors.length > 1) {
-            const shuffled = [...vendors].sort(() => 0.5 - Math.random());
-            setVendors(shuffled);
-            setCurrentIndex(0);
-        }
-    };
+    // const handleShuffle = () => {
+    //     if (vendors.length > 1) {
+    //         const shuffled = [...vendors].sort(() => 0.5 - Math.random());
+    //         setVendors(shuffled);
+    //         setCurrentIndex(0);
+    //     }
+    // };
 
     return (
         <>
@@ -82,20 +87,28 @@ const Swipe = () => {
                         </h2>
                     </div>
 
-                    <div className="flex flex-wrap justify-center gap-4 mt-10 ">
-                        {['Taste', 'Hygiene', 'Hospitality'].map(pref => (
-                            <button
-                                key={pref}
-                                className={`px-6 py-2 ${preferences.includes(pref) ? 'bg-[#FF384A] cursor-pointer hover:bg-white hover:text-black ' : 'bg-gradient-to-r hover:bg-white hover:text-black cursor-pointer from-[#FF384A] to-[#FF5463]'} text-white rounded-3xl text-sm md:text-md flex items-center gap-2 drop-shadow-[0_4px_6px_rgba(255,56,74,0.5)]`}
-                                onClick={() => handlePreferenceClick(pref)}
-                            >
-                                {pref === 'Taste' && <PiForkKnifeBold size={20} />}
-                                {pref === 'Hygiene' && <IoShieldCheckmarkOutline size={20} />}
-                                {pref === 'Hospitality' && <FaRegHeart size={20} />}
-                                {pref}
-                            </button>
-                        ))}
+                    <div className="flex flex-wrap justify-center gap-4 mt-10">
+                        {['Taste', 'Hygiene', 'Hospitality'].map(pref => {
+                            const isSelected = preferences.includes(pref);
+                            return (
+                                <button
+                                    key={pref}
+                                    onClick={() => handlePreferenceClick(pref)}
+                                    className={`px-6 py-2 rounded-3xl text-sm md:text-md flex items-center gap-2 drop-shadow-[0_4px_6px_rgba(255,56,74,0.5)] cursor-pointer 
+          ${isSelected
+                                            ? 'bg-white text-black hover:bg-[#FF384A] hover:text-white'
+                                            : 'bg-gradient-to-r from-[#FF384A] to-[#FF5463] text-white hover:bg-white hover:text-black'
+                                        }`}
+                                >
+                                    {pref === 'Taste' && <PiForkKnifeBold size={20} />}
+                                    {pref === 'Hygiene' && <IoShieldCheckmarkOutline size={20} />}
+                                    {pref === 'Hospitality' && <FaRegHeart size={20} />}
+                                    {pref}
+                                </button>
+                            );
+                        })}
                     </div>
+
 
                     <p className="text-center text-sm md:text-base mt-6 font-semibold">
                         Vendors will be sorted based on your preferences
@@ -103,16 +116,17 @@ const Swipe = () => {
 
                     {/* Show loading spinner while fetching */}
                     {loading && (
-                        <div className="flex justify-center mt-16">
-                            <FiLoader color="black" height={100} width={100} />
+                        <div className="flex justify-center mt-16 animate-spin">
+                            <FiLoader color="black" size={50} height={100} width={100} />
                         </div>
                     )}
 
                     {/* Shuffle & Vendor Count */}
-                    {vendors.length > 0 && !loading && (
+                    {/* {vendors.length > 0 && !loading && (
                         <div className="flex flex-col md:flex-row items-center justify-between mt-10 gap-4">
                             <div className="text-base font-semibold">
                                 Vendor {currentIndex + 1} of {vendors.length}
+
                             </div>
                             <button
                                 className="px-6 py-2 bg-gradient-to-r cursor-pointer from-[#FF384A] to-[#FF5463] text-white rounded-3xl text-sm md:text-md flex items-center gap-2 drop-shadow-[0_4px_6px_rgba(255,56,74,0.5)]"
@@ -121,7 +135,7 @@ const Swipe = () => {
                                 <IoMdShuffle size={20} /> Shuffle
                             </button>
                         </div>
-                    )}
+                    )} */}
 
                     {/* Swipe Card */}
                     <div className="mt-10 flex justify-center">

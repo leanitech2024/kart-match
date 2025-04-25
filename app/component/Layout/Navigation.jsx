@@ -10,7 +10,6 @@ const navItem = [
   { title: "Gallery", href: "/gallery" },
   { title: "Let's Swipe", href: "/swipe" },
   { title: "Locate Us", href: "/locate" },
-  { title: "Join Us", href: "/join" },
   { title: "Support Us", href: "/support" },
 ];
 
