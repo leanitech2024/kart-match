@@ -187,7 +187,7 @@ import { FaRegHeart,FaRegStar , FaHeart } from "react-icons/fa";
 import { CiLocationArrow1 } from "react-icons/ci";
 import Link from "next/link";
 import toast from "react-hot-toast";
-
+import { FaHotel } from 'react-icons/fa';
 const VendorCard = ({ data = [], loading = false, currentPage, setCurrentPage, totalPages }) => {
   
   const [favoritedVendors, setFavoritedVendors] = useState([]); // To store all favorited vendor IDs
@@ -281,7 +281,7 @@ const VendorCard = ({ data = [], loading = false, currentPage, setCurrentPage, t
                       {vendor.hygieneRating[0]}/5
                     </span>
                     <span className="flex items-center gap-1">
-                      <FaRegHeart size={22} className="text-orange-400" />{" "}
+                      <FaHotel size={22} className="text-orange-400" />{" "}
                       {vendor.hospitalityRating[0]}/5
                     </span>
                   </div>

@@ -5,6 +5,7 @@ import { PiForkKnifeBold } from "react-icons/pi";
 import { FaHeart, FaRegStar, FaRegHeart } from "react-icons/fa";
 import { CiLocationArrow1 } from "react-icons/ci";
 import Link from "next/link";
+import { FaHotel } from 'react-icons/fa';
 const FavouriteCard = () => {
     const [vendorsData, setVendorsData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -97,7 +98,7 @@ const FavouriteCard = () => {
                                             <FaRegStar size="25" className="text-yellow-500" /> {vendor?.hygieneRating[0]}/5
                                         </span>
                                         <span className="flex items-center gap-1">
-                                            <FaRegHeart size="25" className="text-orange-400" /> {vendor?.hospitalityRating[0]}/5
+                                            <FaHotel size="20" className="text-orange-400" /> {vendor?.hospitalityRating[0]}/5
                                         </span>
                                     </div>
 
@@ -120,9 +121,17 @@ const FavouriteCard = () => {
                                                 Details
                                             </button>
                                         </Link>
-                                        <button className="px-4 py-2 bg-[#3FA025] cursor-pointer text-white rounded-lg text-sm flex items-center gap-2">
+                                        <button
+                                            className="px-4 py-2 bg-[#3FA025] cursor-pointer text-white rounded-lg text-sm flex items-center gap-2"
+                                            onClick={() => {
+                                                const lat = vendor.location.coordinates[0];
+                                                const lng = vendor.location.coordinates[1];
+                                                window.open(`https://www.google.com/maps/search/?api=1&query=${lat},${lng}`, '_blank');
+                                            }}
+                                        >
                                             <CiLocationArrow1 color="white" size={20} /> Locate
                                         </button>
+
                                     </div>
                                 </div>
                             </div>

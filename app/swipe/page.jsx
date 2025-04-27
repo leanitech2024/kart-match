@@ -8,7 +8,7 @@ import { IoShieldCheckmarkOutline } from "react-icons/io5";
 import { FaRegHeart } from "react-icons/fa";
 import { IoMdShuffle } from "react-icons/io";
 import { FiLoader } from 'react-icons/fi';
-
+import { FaHotel } from 'react-icons/fa';
 const Swipe = () => {
     const [vendors, setVendors] = useState([]);
     const [preferences, setPreferences] = useState([]); // Track preferences state
@@ -102,7 +102,7 @@ const Swipe = () => {
                                 >
                                     {pref === 'Taste' && <PiForkKnifeBold size={20} />}
                                     {pref === 'Hygiene' && <IoShieldCheckmarkOutline size={20} />}
-                                    {pref === 'Hospitality' && <FaRegHeart size={20} />}
+                                    {pref === 'Hospitality' && <FaHotel size={20} />}
                                     {pref}
                                 </button>
                             );

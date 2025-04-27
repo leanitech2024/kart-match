@@ -217,12 +217,7 @@ const Location = () => {
     }
   }, [userLocation]);
 
-  const handleLocate = (lat, lng) => {
 
-    if (mapInstance) {
-      mapInstance.flyTo([lat, lng], 14);
-    }
-  };
 
 
   // Filter vendors based on search
@@ -272,12 +267,12 @@ const Location = () => {
                 value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value);
-               
+
                 }}
               />
             </div>
             <button
-            onClick={() => debouncedSearch(searchQuery, vendorData)}
+              onClick={() => debouncedSearch(searchQuery, vendorData)}
               className="mt-4 sm:mt-0 bg-gradient-to-r from-[#FF7A7A] to-[#F71010] text-white px-6 py-3 rounded-md font-semibold flex items-center justify-center gap-2 w-full sm:w-auto"
             >
               <FaSearchLocation />
@@ -417,12 +412,23 @@ const Location = () => {
                           Details
                         </button>
                       </Link>
-                      <button
+                      {/* <button
                         onClick={() => handleLocate(vendor.location.coordinates[1], vendor.location.coordinates[0])}
                         className="px-4 py-2 bg-[#3FA025] text-white rounded-lg text-sm flex items-center gap-2 justify-center"
                       >
                         <CiLocationArrow1 size={20} />
                         Locate
+                      </button> */}
+                      <button
+                        className="px-4 py-2 bg-[#3FA025] cursor-pointer text-white rounded-lg text-sm flex items-center gap-2"
+                        onClick={() => {
+                          const lat = vendor.location.coordinates[0];
+                          const lng = vendor.location.coordinates[1];
+                          window.open(`https://www.google.com/maps/search/?api=1&query=${lat},${lng}`, '_blank');
+
+                        }}
+                      >
+                        <CiLocationArrow1 color="white" size={20} /> Locate
                       </button>
                     </div>
                   </div>
