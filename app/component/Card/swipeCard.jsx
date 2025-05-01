@@ -299,9 +299,7 @@ const SwipeCard = ({ vendors: vendorList = [], preferences = [] }) => {
                                 {/* Location */}
                                 <div className="flex items-center">
                                     <FaLocationDot color="black" size="18" />
-                                    <span className="ml-2 text-sm">
-                                        Lat: {parseInt(currentVendor.location.coordinates[0])}, Lng: {parseInt(currentVendor.location.coordinates[1])}
-                                    </span>
+                                   
                                 </div>
     
                                 {/* City Badge */}
@@ -322,21 +320,21 @@ const SwipeCard = ({ vendors: vendorList = [], preferences = [] }) => {
                                         <PiForkKnifeBold size={20} className="gap-3 text-orange-500" />
                                         <div className="text-sm mt-1 text-gray-600 font-medium">Taste</div>
                                     </div>
-                                    <span>{currentVendor.tasteRating[0]}/5</span>
+                                    <span>{parseInt(currentVendor.tasteRating)}/5</span>
                                 </div>
                                 <div className="flex flex-col items-center bg-gray-200 p-2 rounded-lg">
                                     <div className="flex items-center gap-1">
                                         <FaRegStar size={20} className="gap-3 text-yellow-500" />
                                         <div className="text-sm mt-1 text-gray-600 font-medium">Hygiene</div>
                                     </div>
-                                    <span>{currentVendor.hygieneRating[0]}/5</span>
+                                    <span>{parseInt(currentVendor.hygieneRating)}/5</span>
                                 </div>
                                 <div className="flex flex-col items-center bg-gray-200 p-2 rounded-lg">
                                     <div className="flex items-center gap-1">
                                         <FaHotel size={20} className="gap-3 text-orange-400" />
                                         <div className="text-sm text-gray-600 font-medium">Hospitality</div>
                                     </div>
-                                    <span>{currentVendor.hospitalityRating[0]}/5</span>
+                                    <span>{parseInt(currentVendor.hospitalityRating)}/5</span>
                                 </div>
                             </div>
     

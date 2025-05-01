@@ -75,7 +75,7 @@ const Location = () => {
     setAppliedRadius(radius);
     try {
       const response = await fetch(
-        `https://kartmatch-backend.onrender.com/api/nearby?lat=${userLocation.lat}&lng=${userLocation.lng}&radius=${radius}`
+        `http://localhost:5000/api/nearby?lat=${userLocation.lat}&lng=${userLocation.lng}&radius=${radius}`
       );
       const data = await response.json();
       console.log("Data vendor", data)
@@ -392,13 +392,13 @@ const Location = () => {
                     <p className="mt-1 text-black">{vendor.foodItems.join(', ')}</p>
                     <div className="flex flex-wrap gap-4 text-orange-600 mt-1 text-sm">
                       <span className="flex items-center gap-1">
-                        <PiForkKnifeBold size={20} className="text-orange-500" /> {vendor.tasteRating[0]}/5
+                        <PiForkKnifeBold size={20} className="text-orange-500" />  {parseInt(vendor?.tasteRating)} / 5 
                       </span>
                       <span className="flex items-center gap-1">
-                        <FaRegStar size={20} className="text-yellow-500" /> {vendor.hygieneRating[0]}/5
+                        <FaRegStar size={20} className="text-yellow-500" />     {parseInt(vendor?.hygieneRating)} / 5
                       </span>
                       <span className="flex items-center gap-1">
-                        <FaRegHeart size={20} className="text-orange-400" /> {vendor.hospitalityRating[0]}/5
+                        <FaRegHeart size={20} className="text-orange-400" />  {parseInt(vendor?.hospitalityRating)} / 5
                       </span>
                     </div>
                   </div>
@@ -422,8 +422,8 @@ const Location = () => {
                       <button
                         className="px-4 py-2 bg-[#3FA025] cursor-pointer text-white rounded-lg text-sm flex items-center gap-2"
                         onClick={() => {
-                          const lat = vendor.location.coordinates[0];
-                          const lng = vendor.location.coordinates[1];
+                          const lat = vendor.location.coordinates[1];
+                          const lng = vendor.location.coordinates[0];
                           window.open(`https://www.google.com/maps/search/?api=1&query=${lat},${lng}`, '_blank');
 
                         }}

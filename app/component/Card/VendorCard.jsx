@@ -274,15 +274,18 @@ const VendorCard = ({ data = [], loading = false, currentPage, setCurrentPage, t
                   <div className="flex gap-3 text-md font-bold text-gray-800 mt-4">
                     <span className="flex items-center gap-1">
                       <PiForkKnifeBold size={22} className="text-orange-500" />{" "}
-                      {vendor.tasteRating[0]}/5
+                     
+                      {parseInt(vendor?.tasteRating)} / 5
                     </span>
                     <span className="flex items-center gap-1">
                       <FaRegStar size={22} className="text-yellow-500" />{" "}
-                      {vendor.hygieneRating[0]}/5
+                      {parseInt(vendor?.hygieneRating)} / 5
+
                     </span>
                     <span className="flex items-center gap-1">
-                      <FaHotel size={22} className="text-orange-400" />{" "}
-                      {vendor.hospitalityRating[0]}/5
+                      <FaHotel size={18} className="text-orange-400" />{" "}
+                    
+                      {parseInt(vendor?.hospitalityRating)} / 5
                     </span>
                   </div>
 

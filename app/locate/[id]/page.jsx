@@ -40,7 +40,7 @@ const VendorDetails = () => {
   useEffect(() => {
     const fetchVendor = async () => {
       try {
-        const res = await fetch(`https://kartmatch-backend.onrender.com/api/vendors/${vendorId}`);
+        const res = await fetch(`http://localhost:5000/api/vendors/${vendorId}`);
         if (!res.ok) throw new Error("Failed to fetch vendor");
         const data = await res.json();
         setVendor(data); // assuming backend responds with { vendor: {...} }
@@ -110,7 +110,14 @@ const VendorDetails = () => {
 
             <p className="flex justify-center items-center text-gray-600 mb-6 gap-2 text-xl font-bold sm:text-base">
               <FaMapMarkerAlt size={20} className="text-red-500" />
-              Lat: {vendor.data.location.coordinates[0]}, Lng: {vendor.data.location.coordinates[1]}
+              <span className="bg-gray-200 text-gray-800 px-3 py-1 text-xs rounded-full">
+                {vendor.data.city}
+              </span>
+
+              {/* State Badge */}
+              <span className="bg-gray-200 text-gray-800 px-3 py-1 text-xs rounded-full">
+                {vendor.data.state}
+              </span>
             </p>
 
             {/* Ratings */}
@@ -118,17 +125,17 @@ const VendorDetails = () => {
               <div className="flex flex-col items-center bg-gray-50 p-4 rounded-lg shadow w-28">
                 <PiForkKnifeBold size={24} />
                 <p className="text-xs mt-1">Taste</p>
-                <StarRating rating={vendor?.data.tasteRating} />
+                <StarRating rating={parseInt(vendor?.data?.tasteRating)} />
               </div>
               <div className="flex flex-col items-center bg-gray-50 p-4 rounded-lg shadow w-28">
                 <MdOutlineCleanHands size={24} />
                 <p className="text-xs mt-1">Hygiene</p>
-                <StarRating rating={vendor?.data.hygieneRating} />
+                <StarRating rating={parseInt(vendor?.data.hygieneRating)} />
               </div>
               <div className="flex flex-col items-center bg-gray-50 p-4 rounded-lg shadow w-28">
                 <RiTeamLine size={24} />
                 <p className="text-xs mt-1">Hospitality</p>
-                <StarRating rating={vendor?.data.hospitalityRating} />
+                <StarRating rating={parseInt(vendor?.data.hospitalityRating)} />
               </div>
             </div>
 
@@ -163,7 +170,14 @@ const VendorDetails = () => {
                 {isFavorited ? 'Favorited' : 'Add To Favorite'}
               </button>
 
-              <button className="bg-green-600 flex items-center justify-center text-white px-5 py-2 rounded-full hover:bg-green-700 transition w-full sm:w-auto">
+              <button className="bg-green-600 flex items-center justify-center text-white px-5 py-2 rounded-full hover:bg-green-700 transition w-full sm:w-auto"
+                onClick={() => {
+                  const lat = vendor.location.coordinates[1];
+                  const lng = vendor.location.coordinates[0];
+                  window.open(`https://www.google.com/maps/search/?api=1&query=${lat},${lng}`, '_blank');
+
+                }}
+              >
                 <FaMapMarkerAlt size={20} className="text-white mt-[3px] mr-2" />
                 <span className="text-sm sm:text-base">View On Map</span>
               </button>
