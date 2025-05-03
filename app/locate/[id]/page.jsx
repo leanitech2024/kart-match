@@ -40,7 +40,7 @@ const VendorDetails = () => {
   useEffect(() => {
     const fetchVendor = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/vendors/${vendorId}`);
+        const res = await fetch(`https://kartmatch-backend.onrender.com/api/vendors/${vendorId}`);
         if (!res.ok) throw new Error("Failed to fetch vendor");
         const data = await res.json();
         setVendor(data); // assuming backend responds with { vendor: {...} }

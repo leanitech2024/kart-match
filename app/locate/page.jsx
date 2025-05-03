@@ -75,7 +75,7 @@ const Location = () => {
     setAppliedRadius(radius);
     try {
       const response = await fetch(
-        `http://localhost:5000/api/nearby?lat=${userLocation.lat}&lng=${userLocation.lng}&radius=${radius}`
+        `https://kartmatch-backend.onrender.com/api/nearby?lat=${userLocation.lat}&lng=${userLocation.lng}&radius=${radius}`
       );
       const data = await response.json();
       console.log("Data vendor", data)
