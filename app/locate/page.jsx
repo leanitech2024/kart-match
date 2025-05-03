@@ -62,9 +62,9 @@ const Location = () => {
 
   // Apply radius input on key press (Enter)
   const handleRadiusInputKeyPress = (e) => {
-    if (e.key === "Enter") {
-      applyCustomRadiusInput();
-    }
+    // if (e.key === "Enter") {
+    applyCustomRadiusInput();
+    // }
   };
 
   // Fetch vendors nearby based on location
@@ -254,105 +254,118 @@ const Location = () => {
 
         {/* This wraps the MAP only */}
         <div id="vendor-map" className="w-full h-96 mb-8 relative z-0"></div>
-        <div className="relative z-10  flex flex-col sm:flex-row items-center justify-center max-w-6xl mx-auto gap-4 px-4">
-          <div className="bg-white bg-opacity-90 shadow-md rounded-md p-4 w-full sm:flex sm:items-center sm:w-auto gap-4">
-            <div className="relative w-full sm:w-96">
+
+        <div className="relative z-10 max-w-3xl mx-auto px-4">
+
+          {/* Search Bar + Button Row */}
+          <div className="bg-white bg-opacity-90 shadow-md rounded-md p-4 flex flex-wrap gap-4 items-start sm:items-center">
+            {/* Search Input */}
+            <div className="relative w-full sm:flex-1">
               <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-                <FaLocationDot color="red" size={25} />
+                <FaLocationDot color="red" size={20} />
               </span>
               <input
                 type="text"
                 placeholder="Search Vendors Or Food Items"
                 className="w-full pl-10 p-3 rounded-md border border-gray-300 shadow-sm outline-none"
                 value={searchQuery}
-                onChange={(e) => {
-                  setSearchQuery(e.target.value);
-
-                }}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
+
+            {/* Search Button */}
             <button
               onClick={() => debouncedSearch(searchQuery, vendorData)}
-              className="mt-4 sm:mt-0 bg-gradient-to-r from-[#FF7A7A] to-[#F71010] text-white px-6 py-3 rounded-md font-semibold flex items-center justify-center gap-2 w-full sm:w-auto"
+              className="bg-gradient-to-r from-[#FF7A7A] to-[#F71010] text-white px-6 py-3 rounded-md font-semibold flex items-center justify-center gap-2 w-full sm:w-auto"
             >
               <FaSearchLocation />
               Find Street Food
             </button>
           </div>
-          <div className="mt-4 px-4">
+
+          {/* Radius & Filters Button */}
+          <div className="w-full mt-4">
             <button
               onClick={() => setIsFiltersVisible(!isFiltersVisible)}
-              className="text-[#FF5722] w-full flex justify-between items-center text-sm font-semibold transition-colors hover:text-orange-600"
+              className="w-full text-[#FF5722] px-4 py-3 flex justify-between items-center text-sm font-semibold hover:text-black hover:bg-gray-200 rounded-md transition-colors duration-300 ease-in-out bg-white bg-opacity-90 shadow-md"
             >
               <span>Radius & Filters</span>
               {isFiltersVisible ? <FaChevronUp size={16} /> : <FaChevronDown size={16} />}
             </button>
-
-            {isFiltersVisible && (
-              <div className="mt-3 pt-4 border-t border-gray-200">
-                <h3 className="text-sm font-semibold mb-3 text-gray-700">Search Radius</h3>
-
-                <div className="flex flex-wrap gap-4 mb-4">
-                  {["5km", "10km", "custom"].map((value, i) => (
-                    <div key={value} className="flex items-center space-x-2">
-                      <input
-                        type="radio"
-                        id={`r${i + 1}`}
-                        name="radius"
-                        value={value}
-                        checked={radiusType === value}
-                        onChange={handleRadiusTypeChange}
-                        className="accent-orange-500"
-                      />
-                      <label htmlFor={`r${i + 1}`} className="text-sm text-gray-600 capitalize">
-                        {value}
-                      </label>
-                    </div>
-                  ))}
-                </div>
-
-                {radiusType === "custom" && (
-                  <div className="mb-4">
-                    <div className="flex justify-between text-xs text-gray-400 mb-1">
-                      <span>1km</span>
-                      <span>{customRadius}km</span>
-                      <span>100km</span>
-                    </div>
-                    <input
-                      type="range"
-                      min="1"
-                      max="100"
-                      value={customRadius}
-                      onChange={(e) => handleCustomRadiusChange(parseFloat(e.target.value))}
-                      className="w-full accent-orange-500"
-                    />
-                    <div className="flex flex-col gap-2 mt-4">
-                      <label htmlFor="custom-radius" className="text-xs font-medium text-gray-600">Set exact radius:</label>
-                      <div className="flex items-center rounded-md overflow-hidden border focus-within:ring-1 focus-within:ring-orange-500">
-                        <input
-                          id="custom-radius"
-                          type="number"
-                          min="1"
-                          max="1000"
-                          step="0.1"
-                          value={radiusInputValue}
-                          onChange={(e) => handleRadiusInputChange(e.target.value)}
-                          onBlur={() => applyCustomRadiusInput()}
-                          onKeyDown={handleRadiusInputKeyPress}
-                          className="w-full py-1.5 px-2 text-sm focus:outline-none"
-                        />
-                        <div className="bg-gray-100 px-3 border-l text-sm text-gray-500">
-                          km
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
           </div>
 
+          {/* Filters Section */}
+          {isFiltersVisible && (
+            <div className="bg-white bg-opacity-90 shadow-md rounded-md mt-4 p-4 border-t border-gray-200">
+              <h3 className="text-sm font-semibold mb-3 text-gray-700">Search Radius</h3>
+
+              {/* Radius Radio Options */}
+              <div className="flex flex-wrap gap-4 mb-4">
+                {["5km", "10km", "custom"].map((value, i) => (
+                  <div key={value} className="flex items-center space-x-2">
+                    <input
+                      type="radio"
+                      id={`r${i + 1}`}
+                      name="radius"
+                      value={value}
+                      checked={radiusType === value}
+                      onChange={handleRadiusTypeChange}
+                      className="accent-orange-500"
+                    />
+                    <label htmlFor={`r${i + 1}`} className="text-sm text-gray-600 capitalize">
+                      {value}
+                    </label>
+                  </div>
+                ))}
+              </div>
+
+              {/* Custom Radius Slider & Input */}
+              {radiusType === "custom" && (
+                <div className="mb-4">
+                  {/* Slider with Range Labels */}
+                  <div className="flex justify-between text-xs text-gray-400 mb-1">
+                    <span>1km</span>
+                    <span>{customRadius}km</span>
+                    <span>100km</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="1"
+                    max="100"
+                    value={customRadius}
+                    onChange={(e) => handleCustomRadiusChange(parseFloat(e.target.value))}
+                    className="w-full accent-orange-500"
+                  />
+
+                  {/* Exact Radius Number Input */}
+                  <div className="flex flex-col gap-2 mt-4">
+                    <label htmlFor="custom-radius" className="text-xs font-medium text-gray-600">
+                      Set exact radius:
+                    </label>
+                    <div className="flex items-center rounded-md overflow-hidden border focus-within:ring-1 focus-within:ring-orange-500">
+                      <input
+                        id="custom-radius"
+                        type="number"
+                        min="1"
+                        max="1000"
+                        step="0.1"
+                        value={radiusInputValue}
+                        onChange={(e) => handleRadiusInputChange(e.target.value)}
+                        onBlur={() => applyCustomRadiusInput()}
+                        onKeyDown={handleRadiusInputKeyPress}
+                        className="w-full py-1.5 px-2 text-sm focus:outline-none"
+                      />
+                      <div className="bg-gray-100 px-3 border-l text-sm text-gray-500">km</div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
+
+
+
         {/* Separate the search bar and controls */}
 
 
@@ -392,7 +405,7 @@ const Location = () => {
                     <p className="mt-1 text-black">{vendor.foodItems.join(', ')}</p>
                     <div className="flex flex-wrap gap-4 text-orange-600 mt-1 text-sm">
                       <span className="flex items-center gap-1">
-                        <PiForkKnifeBold size={20} className="text-orange-500" />  {parseInt(vendor?.tasteRating)} / 5 
+                        <PiForkKnifeBold size={20} className="text-orange-500" />  {parseInt(vendor?.tasteRating)} / 5
                       </span>
                       <span className="flex items-center gap-1">
                         <FaRegStar size={20} className="text-yellow-500" />     {parseInt(vendor?.hygieneRating)} / 5

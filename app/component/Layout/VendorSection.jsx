@@ -13,32 +13,32 @@ import a8 from '../../../Downloads/8.json'
 import Lottie from "lottie-react";
 const vendors = [
   {
-    image: a4,
+    image: a7,
     title: "VADA PAU SELLER",
     item: "Vada Pau",
 
   },
   {
-    image: a5,
+    image: a4,
     title: "GOOGHNI SELLER",
     item: "Googhni",
 
   },
   {
-    image: a6,
+    image: a5, //a6
     title: "DOSA SELLER",
     item: "Dosa and Idli",
   
   },
   {
-    image: a7,
-    title: "PUCHKA",
+    image: a6,
+    title: "PUCHKA SELLER",
     item: "Chanachur Garam",
  
   },
   {
     image: a8,
-    title: "CHANACHUR",
+    title: "CHANACHUR SELLER",
     item: "Chanachur Garam",
    
   },
