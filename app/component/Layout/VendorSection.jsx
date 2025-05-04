@@ -10,6 +10,9 @@ import a5 from '../../../Downloads/5.json'
 import a6 from '../../../Downloads/6.json'
 import a7 from '../../../Downloads/7.json'
 import a8 from '../../../Downloads/8.json'
+import chana from '../../../Downloads/Chanachur.json'
+import puchka from '../../../Downloads/Puchka.json'
+import dosa from '../../../Downloads/dosa.json'
 import Lottie from "lottie-react";
 const vendors = [
   {
@@ -25,19 +28,19 @@ const vendors = [
 
   },
   {
-    image: a5, //a6
+    image: dosa, //a6
     title: "DOSA SELLER",
     item: "Dosa and Idli",
   
   },
   {
-    image: a6,
+    image: puchka,
     title: "PUCHKA SELLER",
     item: "Chanachur Garam",
  
   },
   {
-    image: a8,
+    image: chana,
     title: "CHANACHUR SELLER",
     item: "Chanachur Garam",
    
