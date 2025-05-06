@@ -12,6 +12,7 @@ import Link from "next/link";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 import { useCallback } from 'react';
 import { debounce } from "lodash";
+import { FaHotel } from 'react-icons/fa';
 const calculateDistance = (lat1, lon1, lat2, lon2) => {
   const R = 6371; // Earth radius in km
   const dLat = (lat2 - lat1) * (Math.PI / 180);
@@ -411,7 +412,7 @@ const Location = () => {
                         <FaRegStar size={20} className="text-yellow-500" />     {parseInt(vendor?.hygieneRating)} / 5
                       </span>
                       <span className="flex items-center gap-1">
-                        <FaRegHeart size={20} className="text-orange-400" />  {parseInt(vendor?.hospitalityRating)} / 5
+                        <FaHotel size={18} className="text-orange-400" />  {parseInt(vendor?.hospitalityRating)} / 5
                       </span>
                     </div>
                   </div>
